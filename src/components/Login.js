@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { Button, Form, Input } from 'antd';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { useContext } from "react";
+import { UserContext } from "../App";
  // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -14,7 +16,8 @@ const firebaseConfig = {
   appId: "1:823400274545:web:b332dae86f1acf437ad9d0"
 };
 
-export default function Login(setUser) {
+export default function Login() {
+    const { setUser } = useContext(UserContext);
     const handleLogin = (email, password) => { 
         const app = initializeApp(firebaseConfig); // connects to firebase
         const auth = getAuth(app) // connects to firebase authentication
