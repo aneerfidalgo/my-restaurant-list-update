@@ -9,13 +9,11 @@ export default function RestaurantCard({ restaurant }) {
   return (
     <Col style={{ width: "300px", margin: "1em" }}>
       <Card
-        onClick={() => navigate(`/restaurants/${restaurant.id}`)}
-        cover={
-          <img alt={restaurant.name} src={restaurant.image} />
-        }
-        hoverable
-      >
-        <Meta title={restaurant.name} description={restaurant.address} />
+      loading={!restaurant}
+        onClick={() => navigate(`/restaurants/${restaurant?.id}`)}
+        cover={restaurant &&  <img alt={restaurant?.name} src={restaurant?.image} /> }
+        hoverable>
+        <Meta title={restaurant?.name} description={restaurant?.address} />
       </Card>
     </Col>
   );
