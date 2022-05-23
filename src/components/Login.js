@@ -14,13 +14,13 @@ const firebaseConfig = {
   appId: "1:823400274545:web:b332dae86f1acf437ad9d0"
 };
 
-export default function Login() {
+export default function Login(setUser) {
     const handleLogin = (email, password) => { 
         const app = initializeApp(firebaseConfig); // connects to firebase
         const auth = getAuth(app) // connects to firebase authentication
         //Login with firebase auth
         signInWithEmailAndPassword(auth, email, password)
-        .then(res => console.log(res.user))
+        .then(res => setUser(res.user))
         .catch(console.error)
     }
     const handleGoogleLogin = () => {
@@ -28,7 +28,7 @@ export default function Login() {
         const auth = getAuth(app) // connects to firebase authentication
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
-        .then(res => console.log(res.user))
+        .then(res => setUser(res.user))
         .catch(console.error)
 
     }
