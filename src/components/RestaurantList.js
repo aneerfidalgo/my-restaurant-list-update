@@ -16,9 +16,11 @@ function RestaurantList() {
           <h2>Loading...</h2>
         ) : (
           restaurants.map((restaurant) => (
-              <Col style={{width: '300px'}} key={restaurant.id}>
-                <Card title={restaurant.name} hoverable>
-            <p>{restaurant.address}</p>
+              <Col style={{width: '300px', margin: '1em'}} key={restaurant.id}>
+                <Card 
+                cover={<img alt={`Photo of how ${restaurant.name}}`} src={restaurant.image} />}
+                hoverable>
+                <Card.Meta title={restaurant.name} description={restaurant.address} />
             </Card>
             </Col>
           ))
