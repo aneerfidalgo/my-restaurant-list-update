@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { Button, Form, Input } from 'antd';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
  // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,6 +23,15 @@ export default function Login() {
         .then(res => console.log(res.user))
         .catch(console.error)
     }
+    const handleGoogleLogin = () => {
+        const app = initializeApp(firebaseConfig); // connects to firebase
+        const auth = getAuth(app) // connects to firebase authentication
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+        .then(res => console.log(res.user))
+        .catch(console.error)
+
+    }
     return(
         <section style={{ padding: '2em'}}>
         <Form 
@@ -42,6 +51,11 @@ export default function Login() {
             wrapperCol={{span: 16, offset: 8}}
             >
                 <Button type='primary' htmlType='submit'>Login</Button>
+            </Form.Item>
+            <Form.Item
+            wrapperCol={{span: 16, offset: 8}}
+            >
+                <Button onClick={handleGoogleLogin}>Google Login</Button>
             </Form.Item>
         </Form>
         </section>
