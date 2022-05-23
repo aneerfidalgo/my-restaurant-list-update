@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "antd";
 import RestaurantList from "./components/RestaurantList";
@@ -10,10 +10,14 @@ import React from "react";
 
 const { Header, Content } = Layout;
 
+
+export const UserContext = createContext(null);
+
 function App() {
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState()
   return (
     <BrowserRouter>
+    <UserContext.Provider value={{user, setUser}}>
     <Layout className="layout">
       <Header>
      <Menubar />
@@ -27,6 +31,7 @@ function App() {
         </Routes>
       </Content>
     </Layout>
+    </UserContext.Provider>
     </BrowserRouter>
   );
 }
